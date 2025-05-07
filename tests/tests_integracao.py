@@ -1,12 +1,12 @@
 from app.main import app, usuarios
 
-def test_criacao_usuario_valido():
+def test_criacao_usuario():
     usuarios.clear()
     app.testing = True
     client = app.test_client()
     response = client.post("/usuarios", json={
-        "nome": "Maria",
-        "email": "maria@email.com",
+        "nome": "Mirele",
+        "email": "mirele@email.com",
         "senha": "1234",
         "cpf": "11122233344"
     })
@@ -19,8 +19,8 @@ def test_listagem_todos_usuarios():
     app.testing = True
     client = app.test_client()
     client.post("/usuarios", json={
-        "nome": "João",
-        "email": "joao@email.com",
+        "nome": "Erik",
+        "email": "erik@email.com",
         "senha": "abcd",
         "cpf": "22233344455"
     })
@@ -28,7 +28,7 @@ def test_listagem_todos_usuarios():
     json_data = response.get_json()
     assert response.status_code == 200
     assert len(json_data) == 1
-    assert json_data[0]["nome"] == "João"
+    assert json_data[0]["nome"] == "Erik"
 
 def test_busca_usuario_existente():
     usuarios.clear()
@@ -59,8 +59,8 @@ def test_exclusao_usuario_existente():
     app.testing = True
     client = app.test_client()
     client.post("/usuarios", json={
-        "nome": "Carlos",
-        "email": "carlos@email.com",
+        "nome": "Rafael",
+        "email": "rafael@email.com",
         "senha": "senha",
         "cpf": "44455566677"
     })
